@@ -1,5 +1,6 @@
 package com.example.steptestjava;
 
+import android.Manifest;
 import android.app.Activity;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import androidx.core.app.ActivityCompat;
 
 public class MainActivity extends Activity implements SensorEventListener,
         View.OnClickListener, RadioGroup.OnCheckedChangeListener {
@@ -24,6 +27,12 @@ public class MainActivity extends Activity implements SensorEventListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        String[] permissions={Manifest.permission.ACTIVITY_RECOGNITION};
+
+        ActivityCompat.requestPermissions(this, permissions,1000);
+
+
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         mStepsTextView = (TextView) findViewById(R.id.textView1);
         mStartStopButton = (ImageButton) findViewById(R.id.button1);
